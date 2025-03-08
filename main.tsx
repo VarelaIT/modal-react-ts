@@ -1,4 +1,4 @@
-import React, { ReactNode, useState, createContext, useContext } from "npm:react";
+import { Context, createContext, ReactNode, useContext, useState } from "npm:react@^19.0.0";
 
 export interface IModalProps{
     title?: string;
@@ -9,7 +9,7 @@ export interface IModalProps{
 }
  
 export type AddModalFC = ({title, message, options, setResult, Render}: IModalProps)=> void;
-export const ModalContext = createContext< {add: AddModalFC} | undefined >(undefined);
+export const ModalContext: Context<{ add: AddModalFC; } | undefined> = createContext< {add: AddModalFC} | undefined >(undefined);
 
 export function ModalReactJS({children}: {children: ReactNode}): ReactNode{
     const [modalElements, setModalElements] = useState<Array<{render: (parameter: {config: ModalObject})=> ReactNode, config: ModalObject}>>([]);
@@ -34,7 +34,7 @@ export function ModalReactJS({children}: {children: ReactNode}): ReactNode{
     );
 }
 
-export function ExampleNode(){
+export function ExampleNode(): ReactNode{
     const modal = useContext(ModalContext)
 
     return (
@@ -48,7 +48,7 @@ export interface IModalNodeProps{
     ModalUI: (parameter: {config: ModalObject;})=> ReactNode;
     config: ModalObject;
 }
-export function ModalNode({ModalUI, config}: IModalNodeProps){
+export function ModalNode({ModalUI, config}: IModalNodeProps): ReactNode{
     return <ModalUI config={config}/>
 }
 

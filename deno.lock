@@ -1,0 +1,48 @@
+{
+  "version": "4",
+  "specifiers": {
+    "jsr:@std/assert@1": "1.0.11",
+    "jsr:@std/internal@^1.0.5": "1.0.5",
+    "npm:react-dom@19": "19.0.0_react@19.0.0",
+    "npm:react@*": "19.0.0",
+    "npm:react@19": "19.0.0"
+  },
+  "jsr": {
+    "@std/assert@1.0.11": {
+      "integrity": "2461ef3c368fe88bc60e186e7744a93112f16fd110022e113a0849e94d1c83c1",
+      "dependencies": [
+        "jsr:@std/internal"
+      ]
+    },
+    "@std/internal@1.0.5": {
+      "integrity": "54a546004f769c1ac9e025abd15a76b6671ddc9687e2313b67376125650dc7ba"
+    }
+  },
+  "npm": {
+    "react-dom@19.0.0_react@19.0.0": {
+      "integrity": "sha512-4GV5sHFG0e/0AD4X+ySy6UJd3jVl1iNsNHdpad0qhABJ11twS3TTBnseqsKurKcsNqCEFeGL3uLpVChpIO3QfQ==",
+      "dependencies": [
+        "react",
+        "scheduler"
+      ]
+    },
+    "react@19.0.0": {
+      "integrity": "sha512-V8AVnmPIICiWpGfm6GLzCR/W5FXLchHop40W4nXBmdlEceh16rCN8O8LNWm5bh5XUX91fh7KpA+W0TgMKmgTpQ=="
+    },
+    "scheduler@0.25.0": {
+      "integrity": "sha512-xFVuu11jh+xcO7JOAGJNOXld8/TcEHK/4CituBUeUb5hqxJLj9YuemAEuvm9gQ/+pgXYfbQuqAkiYu+u7YEsNA=="
+    }
+  },
+  "remote": {
+    "https://esm.sh/preact@10.19.2/denonext/jsx-runtime.mjs": "aa322a16b0d48602de0292c7e179c1bc6fdc9682f64790574d41365096b057bc",
+    "https://esm.sh/preact@10.19.2/denonext/preact.mjs": "21041a67baec6418eab84df650925bf461355388cc901370580312bbf9fbb4bf",
+    "https://esm.sh/preact@10.19.2/jsx-runtime": "69b179ea4572438447c13fcd753d3272a5da7447ebde48379faad3d8195e6d96"
+  },
+  "workspace": {
+    "dependencies": [
+      "jsr:@std/assert@1",
+      "npm:react-dom@19",
+      "npm:react@19"
+    ]
+  }
+}

@@ -1,4 +1,4 @@
-import { Context, createContext, ReactNode, useContext, useState } from "npm:react@^19.0.0";
+import { Context, createContext, ReactNode, useContext, useState } from "react";
 
 export interface IModalProps{
     title?: string;

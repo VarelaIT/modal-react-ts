@@ -15,7 +15,6 @@
   "compilerOptions": {
     "jsx": "react-jsx",
     "jsxImportSource": "npm:react@^19.0.0",
-    "jsxImportSourceTypes": "npm:@types/react@^19.0.10",
-    "noImplicitAny": false
+    "jsxImportSourceTypes": "npm:@types/react@^19.0.10"
   }
 }

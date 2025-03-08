@@ -1,77 +1,77 @@
 import React, { ReactNode, useState, createContext, useContext } from "react";
 
-export interface IPromptProps{
+export interface IModalProps{
     title?: string;
     message: string;
     options: Array<any>;
     setResult: React.Dispatch<React.SetStateAction<any>>;
-    Render: (parameter:  {config: PromptObject})=> ReactNode;
+    Render: (parameter:  {config: ModalObject})=> ReactNode;
 }
  
-export type AddPromptFC = ({title, message, options, setResult, Render}: IPromptProps)=> void;
-export const PromptContext = createContext< {add: AddPromptFC} | undefined >(undefined);
+export type AddModalFC = ({title, message, options, setResult, Render}: IModalProps)=> void;
+export const ModalContext = createContext< {add: AddModalFC} | undefined >(undefined);
 
-export function PromptReactJS({children}: {children: ReactNode}){
-    const [promptElements, setPromptElements] = useState<Array<{render: (parameter: {config: PromptObject})=> ReactNode, config: PromptObject}>>([]);
+export function ModalReactJS({children}: {children: ReactNode}){
+    const [modalElements, setModalElements] = useState<Array<{render: (parameter: {config: ModalObject})=> ReactNode, config: ModalObject}>>([]);
    
-    const addPrompt: AddPromptFC = ({title, message, options, setResult, Render}: IPromptProps) => {
-        const element = {render: Render, config: new PromptObject(message, options, setResult, setPromptElements, title)};
-        setPromptElements([...promptElements, element])
+    const addModal: AddModalFC = ({title, message, options, setResult, Render}: IModalProps) => {
+        const element = {render: Render, config: new ModalObject(message, options, setResult, setModalElements, title)};
+        setModalElements([...modalElements, element])
     }
 
     return (
-        <PromptContext.Provider value={{add: addPrompt}}>
+        <ModalContext.Provider value={{add: addModal}}>
             {children}
             <section>
-                {promptElements.map((item, i)=> {
+                {modalElements.map((item, i)=> {
                     item.config.setIndex(i);
                     return (
-                        <item.render key={"promptElementNumber" + i}config={item.config}/>
+                        <item.render key={"ModalElementNumber" + i}config={item.config}/>
                     );
                 })}
             </section>
-        </PromptContext.Provider>
+        </ModalContext.Provider>
     );
 }
 
 export function ExampleNode(){
-    const prompt = useContext(PromptContext)
+    const modal = useContext(ModalContext)
 
     return (
         <article>
-            This is a prompt!
+            This is a modal!
         </article>
     );
 }
 
-export interface IPromptNodeProps{
-    PromptUI: (parameter: {config: PromptObject;})=> ReactNode;
-    config: PromptObject;
+export interface IModalNodeProps{
+    ModalUI: (parameter: {config: ModalObject;})=> ReactNode;
+    config: ModalObject;
 }
-export function PromptNode({PromptUI, config}: IPromptNodeProps){
-    return <PromptUI config={config}/>
+export function ModalNode({ModalUI, config}: IModalNodeProps){
+    return <ModalUI config={config}/>
 }
 
-export class PromptObject{
+export class ModalObject{
     title?: string;
     index: number = -1;
     message: string;
     options: Array<any>;
     setter: React.Dispatch<React.SetStateAction<any>>;
-    setPromptElements: React.Dispatch<React.SetStateAction<Array<{render: (parameter: {config: PromptObject})=> ReactNode, config: PromptObject}>>>;
+    setModalElements: React.Dispatch<React.SetStateAction<Array<{render: (parameter: {config: ModalObject})=> ReactNode, config: ModalObject}>>>;
 
     constructor(
         message: string, 
         options: Array<any>, 
         setter: React.Dispatch<React.SetStateAction<any>>, 
-        setPromptElements: React.Dispatch<React.SetStateAction<Array<{render: (parameter: {config: PromptObject})=> ReactNode, config: PromptObject}>>>,
+        setModalElements: React.Dispatch<React.SetStateAction<Array<{render: (parameter: {config: ModalObject})=> ReactNode, config: ModalObject}>>>,
         title?: string
     ){
         this.title = title;
         this.message = message;
         this.options = options;
         this.setter = setter;
-        this.setPromptElements = setPromptElements;
+        this.setModalElements = setModalElements;
     }
 
     setIndex(i: number){
@@ -84,7 +84,7 @@ export class PromptObject{
     }
 
     close(){
-        this.setPromptElements((prev)=> prev.filter((_, i)=> i !== this.index))
+        this.setModalElements((prev)=> prev.filter((_, i)=> i !== this.index))
     }
 
 }

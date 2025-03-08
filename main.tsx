@@ -1,18 +1,19 @@
-import { Context, createContext, ReactNode, useContext, useState } from "react";
+'use client';
+import React, { Context, createContext, ReactNode, useContext, useState } from "react";
 
 export interface IModalProps{
     title?: string;
     message: string;
     options: Array<any>;
     setResult: React.Dispatch<React.SetStateAction<any>>;
-    Render: (parameter:  {config: ModalObject})=> ReactNode;
+    Render: (parameter:  {config: ModalObject})=> React.ReactNode;
 }
  
 export type AddModalFC = ({title, message, options, setResult, Render}: IModalProps)=> void;
-export const ModalContext: Context<{ add: AddModalFC; } | undefined> = createContext< {add: AddModalFC} | undefined >(undefined);
+export const ModalContext: React.Context<{ add: AddModalFC; } | undefined> = createContext< {add: AddModalFC} | undefined >(undefined);
 
-export function ModalReactJS({children}: {children: ReactNode}): ReactNode{
-    const [modalElements, setModalElements] = useState<Array<{render: (parameter: {config: ModalObject})=> ReactNode, config: ModalObject}>>([]);
+export function ModalReactJS({children}: {children: React.ReactNode}): React.ReactNode{
+    const [modalElements, setModalElements] = useState<Array<{render: (parameter: {config: ModalObject})=> React.ReactNode, config: ModalObject}>>([]);
    
     const addModal: AddModalFC = ({title, message, options, setResult, Render}: IModalProps) => {
         const element = {render: Render, config: new ModalObject(message, options, setResult, setModalElements, title)};
@@ -34,7 +35,7 @@ export function ModalReactJS({children}: {children: ReactNode}): ReactNode{
     );
 }
 
-export function ExampleNode(): ReactNode{
+export function ExampleNode(): React.ReactNode{
     const modal = useContext(ModalContext)
 
     return (
@@ -45,10 +46,10 @@ export function ExampleNode(): ReactNode{
 }
 
 export interface IModalNodeProps{
-    ModalUI: (parameter: {config: ModalObject;})=> ReactNode;
+    ModalUI: (parameter: {config: ModalObject;})=> React.ReactNode;
     config: ModalObject;
 }
-export function ModalNode({ModalUI, config}: IModalNodeProps): ReactNode{
+export function ModalNode({ModalUI, config}: IModalNodeProps): React.ReactNode{
     return <ModalUI config={config}/>
 }
 
@@ -58,13 +59,13 @@ export class ModalObject{
     message: string;
     options: Array<any>;
     setter: React.Dispatch<React.SetStateAction<any>>;
-    setModalElements: React.Dispatch<React.SetStateAction<Array<{render: (parameter: {config: ModalObject})=> ReactNode, config: ModalObject}>>>;
+    setModalElements: React.Dispatch<React.SetStateAction<Array<{render: (parameter: {config: ModalObject})=> React.ReactNode, config: ModalObject}>>>;
 
     constructor(
         message: string, 
         options: Array<any>, 
         setter: React.Dispatch<React.SetStateAction<any>>, 
-        setModalElements: React.Dispatch<React.SetStateAction<Array<{render: (parameter: {config: ModalObject})=> ReactNode, config: ModalObject}>>>,
+        setModalElements: React.Dispatch<React.SetStateAction<Array<{render: (parameter: {config: ModalObject})=> React.ReactNode, config: ModalObject}>>>,
         title?: string
     ){
         this.title = title;

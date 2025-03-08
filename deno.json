@@ -16,5 +16,11 @@
     "jsx": "react-jsx",
     "jsxImportSource": "npm:react@^19.0.0",
     "jsxImportSourceTypes": "npm:@types/react@^19.0.10"
-  }
+  },
+  "publish": {
+		"include": [
+			"main.tsx",
+			"README.md"
+		]
+	}
 }
